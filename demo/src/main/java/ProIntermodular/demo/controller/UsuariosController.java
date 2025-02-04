@@ -33,17 +33,17 @@ public class UsuariosController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Usuarios> getUsuarioById(@PathVariable long id){
+    public Optional<Usuarios> getUsuarioById(@PathVariable Integer id){
         return this.usuariosService.getById(id);
     }
 
     @PutMapping (path = "/{id}")
-    public Usuarios updateUsuariosById(@RequestBody Usuarios usuarios , @PathVariable Long id ){
+    public Usuarios updateUsuariosById(@RequestBody Usuarios usuarios , @PathVariable Integer id ){
         return this.usuariosService.updateById(usuarios , id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public String deleteById(@PathVariable ("id"  ) Long id ){
+    public String deleteById(@PathVariable ("id"  ) Integer id ){
         boolean ok = this.usuariosService.deleteUsuarios(id);
         if (ok ){
             return "Usuario de id es " + id + "eliminado";
@@ -70,7 +70,7 @@ public class UsuariosController {
     @PostMapping("doregistro")
     public String registrarUsuario(@ModelAttribute Usuarios usuarios, Model model){
         Usuarios usuarioGuardado = usuariosService.registrarUsuario(usuarios);
-        return "login"; // Redirigir a la página de login (crear login.html en templates)
+        return "index"; // Redirigir a la página de login (crear index.html en templates)
     }
 
     // Registro de usuario
