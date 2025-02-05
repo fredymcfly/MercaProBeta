@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 // Indica que esta clase es un controlador en Spring MVC
 @Controller
 // Define la ruta base para todas las solicitudes a este controlador
@@ -25,12 +27,12 @@ public class ShoppingListController {
     private UsuariosService userService;
 
     @GetMapping()
-    public String getAllLists(Model model){
-        // Obtiene todas las listas de compras desde el servicio
-        var datos = service.findAll();
-        model.addAttribute("listasCompra",datos);
-        return "fragments/listasCompra";
-        //return datos != null ? ResponseEntity.ok().body(datos) : ResponseEntity.ok().body(datos);
+    public CompletableFuture<String> getAllLists(Model model){
+        // Obtiene todas las listas de compras desde el servicio de forma asincrona
+        return service.findAll().thenApply(datos -> {
+            model.addAttribute("listasCompra", datos);
+            return "fragments/listasCompra";
+        });
     }
 
 //    @GetMapping()
@@ -54,7 +56,7 @@ public class ShoppingListController {
     @GetMapping("nuevaLista")
     public String showNuevaLista()
     {
-        return "NuevaLista";
+        return "fragments/NuevaLista";
     }
 
     @GetMapping("detalleslista")

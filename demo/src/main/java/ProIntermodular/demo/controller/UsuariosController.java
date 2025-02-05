@@ -70,7 +70,7 @@ public class UsuariosController {
     @PostMapping("doregistro")
     public String registrarUsuario(@ModelAttribute Usuarios usuarios, Model model){
         Usuarios usuarioGuardado = usuariosService.registrarUsuario(usuarios);
-        return "index"; // Redirigir a la página de login (crear index.html en templates)
+        return "login"; // Redirigir a la página de login (crear login.html en templates)
     }
 
     // Registro de usuario

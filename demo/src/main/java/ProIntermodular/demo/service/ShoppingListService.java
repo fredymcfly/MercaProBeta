@@ -3,7 +3,11 @@ package ProIntermodular.demo.service;
 import ProIntermodular.demo.model.ShoppingList;
 import ProIntermodular.demo.repository.IShoppingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 import java.util.List;
 // Indica que esta clase es un servicio gestionado por Spring
@@ -12,10 +16,14 @@ public class ShoppingListService {
     // Inyección de dependencias: el repositorio es gestionado automáticamente por Spring
     @Autowired
     private IShoppingListRepository repository;
+
     // Método que devuelve todas las listas de compras almacenadas en la base de datos
-    public List<ShoppingList> findAll(){
+    @Async
+    public CompletableFuture<List<ShoppingList>> findAll(){
         //este metodo devuelve todas las listas
-        return repository.findAll();
+        return CompletableFuture.supplyAsync(() -> {
+            return repository.findAll();
+        });
     }
 
     /*public List<ShoppingList> findAll(){

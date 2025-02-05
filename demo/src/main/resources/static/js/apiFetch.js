@@ -2,7 +2,10 @@ async function ObtenerApi(url, headers = {}) {
     try {
         const respuesta = await fetch(url, { method: "GET", headers });
 
-        if (!respuesta.ok) throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+        if (!respuesta.ok)
+        {
+            throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+        }
 
         return await respuesta.json();
     } catch (error) {
@@ -10,6 +13,7 @@ async function ObtenerApi(url, headers = {}) {
         return null;
     }
 }
+
 
 async function EnviarApi(url, datos, headers = {}) {
     try {
