@@ -1,4 +1,3 @@
-
 package ProIntermodular.demo.model;
 
 import jakarta.persistence.*;

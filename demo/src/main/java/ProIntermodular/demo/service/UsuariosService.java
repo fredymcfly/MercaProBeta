@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UsuariosService {
@@ -17,13 +18,19 @@ public class UsuariosService {
         return (ArrayList<Usuarios>) usuariosRepositories.findAll();
     }
 
-
     public Usuarios guardar(Usuarios usuarios) {
         return usuariosRepositories.save(usuarios);
     }
 
+//    @Async
+//    public CompletableFuture<Optional<Usuarios>> getById(Integer id) {
+//        return CompletableFuture.supplyAsync(() -> {
+//            return usuariosRepositories.findById(id);
+//        });
+//    }
+
     public Optional<Usuarios> getById(Integer id) {
-        return usuariosRepositories.findById(id);
+            return usuariosRepositories.findById(id);
     }
 
     public Usuarios getByLogin(String email,String pass ) {
@@ -55,7 +62,7 @@ public class UsuariosService {
         if (usuariosRepositories.findByEmail(usuario.getEmail()).isPresent()) {
             throw new IllegalStateException("El correo ya está registrado");
         }
-        // Guarda el usuario en la base de datos
+    // Guarda el usuario en la base de datos
         return usuariosRepositories.save(usuario);
     }
 

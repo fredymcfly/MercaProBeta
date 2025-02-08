@@ -62,7 +62,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+  --bs-body-bg: #59d84b;
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #dee2e6;
@@ -625,6 +625,37 @@ progress {
   color: #6c757d;
 }
 
+#contenido
+{
+    /*-webkit-box-shadow: 5px 7px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 7px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 7px 15px 0px rgba(0,0,0,0.75);
+      border-radius: 15px 15px 15px 15px;
+      -moz-border-radius: 15px 15px 15px 15px;
+      -webkit-border-radius: 15px 15px 15px 15px;
+      border: 0px solid #000000;*/
+
+      padding-top:20px;
+      /*background-color: 248, 249, 250;*/
+
+       display: flow;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #7ed321, #41b883);
+      /*color: white;*/
+      text-align: center;
+
+        background: rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#contenido > .container {
+    margin: 0px;
+}
+
 .container,
 .container-fluid,
 .container-xxl,
@@ -634,11 +665,12 @@ progress {
 .container-sm {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
-  width: 100%;
+  width: 80%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+
 }
 
 @media (min-width: 576px) {
@@ -3617,6 +3649,7 @@ textarea.form-control-lg {
   margin-bottom: 0;
   list-style: none;
 }
+
 
 .nav-link {
   display: block;

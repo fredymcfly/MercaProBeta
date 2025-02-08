@@ -19,13 +19,17 @@ async function EnviarApi(url, datos, headers = {}) {
     try {
         const respuesta = await fetch(url, {
             method: "POST",
-            headers: { "Content-Type": "application/json", ...headers },
+            headers: { "Content-Type": "application/json", headers },
             body: JSON.stringify(datos)
         });
 
-        if (!respuesta.ok) throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+        if (!respuesta.ok)
+        {
+            //throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+            console.log(respuesta);
+        }
 
-        return await respuesta.json();
+        return await respuesta;//.json();
     } catch (error) {
         console.error("Error en EnviarApi:", error);
         return null;

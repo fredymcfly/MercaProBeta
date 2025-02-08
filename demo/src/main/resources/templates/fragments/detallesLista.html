@@ -1,65 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MercaPro - Detalles de Lista</title>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <style>
-    .product-list {
-        margin-top: 20px;
-    }
-    .product-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        background-color: #f9f9f9;
-    }
-    .total-section {
-        margin-top: 20px;
-        text-align: right;
-    }
-  </style>
-</head>
-<body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">MercaPro</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">
-          <i class="fa fa-home"></i>
-          Inicio
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fa fa-list"></i>
-          Listas
-        </a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-  </div>
-</nav>
-
 <!-- Contenido principal -->
 <div class="container mt-4">
+  <div class="row">
+    <div class="col-6 offset-3"><h1 class="text-center mb-4">Detalle de lista: PINTAR EL NOMBRE DE LA LISTA DE COMPRA</h1></div>
+  </div>
   <!-- Buscador de productos y botón Añadir -->
   <div class="d-flex align-items-center">
     <input type="text" class="form-control" id="searchProduct" placeholder="Buscar producto...">
@@ -69,6 +12,7 @@
   <!-- Lista de productos -->
   <div class="product-list mt-4">
     <!-- Los productos añadidos aparecerán aquí -->
+    <!-- coger el paquete que viene a nombre de "listaCompra" y lo tengo abrir y mostrarlo en la vista-->
   </div>
 
   <!-- Total -->
@@ -125,6 +69,3 @@
       totalPriceEl.textContent = total.toFixed(2);
   }
 </script>
-
-</body>
-</html>

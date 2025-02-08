@@ -27,9 +27,10 @@ public class ShoppingListController {
     private UsuariosService userService;
 
     @GetMapping()
-    public CompletableFuture<String> getAllLists(Model model){
+    public CompletableFuture<String> getAllLists(HttpSession session, Model model){
         // Obtiene todas las listas de compras desde el servicio de forma asincrona
-        return service.findAll().thenApply(datos -> {
+        Integer usuarioId = (Integer) session.getAttribute("usuarioId");
+        return service.findAll(usuarioId).thenApply(datos -> {
             model.addAttribute("listasCompra", datos);
             return "fragments/listasCompra";
         });
@@ -59,20 +60,23 @@ public class ShoppingListController {
         return "fragments/NuevaLista";
     }
 
-    @GetMapping("detalleslista")
-    public String showDetalleLista(int id)
+    @GetMapping("detallesLista")
+    public String showDetalleLista(@RequestParam Long id,Model model)
     {
         //1 capturar el id de la lista que quiero mostrar
 
         //2 consultar a BD la lista que quiero consultar
-        //objetoLista = servicio.consultarLista(3)
+        var objetoLista = service.getById(id);
 
         //3 cargar tambien los productos de la lista
-
+        if(objetoLista.isPresent())
+        {
+            model.addAttribute("listaCompra", objetoLista.get());
+        }
+        return "fragments/detallesLista";
         //4 con todo el objeto lista de compra relleno lo mandamos a la vista Detalle
-
-        return "DetallesLista";
     }
+
     // Maneja las solicitudes POST para crear una nueva lista de compras
     @PostMapping("/save")
     public ResponseEntity<?> createList(@RequestBody ShoppingList shoppingList, HttpSession session){
@@ -81,26 +85,20 @@ public class ShoppingListController {
         //antes de grabarlo en base de datos modificamos el modelo de lista de compra y le añadimos el idusuario
         if(usuarioId != 0)
         {
-            var loggedUser = userService.getById(usuarioId);
-            if(!loggedUser.isPresent())
+            var user = userService.getById(usuarioId);
+            if(user.isPresent())
             {
-                shoppingList.setUsuario(loggedUser.get());
+                shoppingList.setUsuario(user.get());
+                // Llama al servicio para guardar la nueva lista de compras
+                var shoppingListGuardada = service.guardar(shoppingList);
+
+                if(shoppingListGuardada != null)
+                {
+                    return ResponseEntity.ok().body("ok");
+                }
             }
         }
-
-        // Llama al servicio para guardar la nueva lista de compras
-        var shoppingListGuardada = service.guardar(shoppingList);
-
-        if(shoppingListGuardada != null)
-        {
-            return ResponseEntity.ok().body("Ok todo");
-        }
-        else
-        {
-            return ResponseEntity.badRequest().body("Datos inválidos");
-        }
+        return ResponseEntity.badRequest().body("ko");
     }
-
-
 
 }
