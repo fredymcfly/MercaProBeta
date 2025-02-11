@@ -9,33 +9,36 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
-
+    // Inyección del servicio de usuarios para gestionar la autenticación
     @Autowired
     private UsuariosService usuariosService;
 
+    // Método que maneja la solicitud GET a "/login" y muestra la página de inicio de sesión
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";
+        return "fragments/login";// Retorna el nombre de la vista "login"
     }
 
+
+    // Método que maneja la solicitud POST a "/dologin" para procesar el inicio de sesión
     @PostMapping("/dologin")
     public String DoLogin(@RequestParam String email, @RequestParam String password, HttpSession session){
+        // Llama al servicio de usuarios para verificar si existe un usuario con las credenciales proporcionadas
         var user = this.usuariosService.getByLogin(email, password);
         if(user != null)
         {
-            //dejamos pasar
-            // Guardamos el ID del usuario en la sesión
-            session.setAttribute("usuarioId", user.getId());
-            session.setAttribute("usuarioEmail", user.getEmail());
+
+            // Guarda información del usuario en la sesión para mantenerlo autenticado
+            session.setAttribute("usuarioId", user.getId());// Guarda el ID del usuario
+            session.setAttribute("usuarioEmail", user.getEmail());// Guarda el email del usuario
             //ir a la vista de gestion listas de compra
+
+            // Redirige a la vista principal después del inicio de sesión exitoso
             return "index";
         }
-        else
+        else // Si el usuario no existe (credenciales incorrectas)
         {
-            return "login";
+            return "index";// Redirige a la página principal (puede mejorarse mostrando un mensaje de error)
         }
     }
-
-    // Creo el apartado de restro de usuario
-
 }

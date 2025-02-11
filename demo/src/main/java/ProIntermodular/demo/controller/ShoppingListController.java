@@ -54,6 +54,7 @@ public class ShoppingListController {
 //    }
 
 
+
     @GetMapping("nuevaLista")
     public String showNuevaLista()
     {
@@ -76,6 +77,7 @@ public class ShoppingListController {
         return "fragments/detallesLista";
         //4 con todo el objeto lista de compra relleno lo mandamos a la vista Detalle
     }
+
 
     // Maneja las solicitudes POST para crear una nueva lista de compras
     @PostMapping("/save")
@@ -100,5 +102,7 @@ public class ShoppingListController {
         }
         return ResponseEntity.badRequest().body("ko");
     }
+
+
 
 }

@@ -49,6 +49,7 @@
        align-items: center;
        margin-bottom: 5px;
    }
+
    .container {
        background-color: rgba(255, 255, 255, 0.8);
        padding: 20px;
@@ -83,13 +84,22 @@
     </div>
     Listas
   </a>
-  <a href="#" id="login" >
+  <a href="#" id="detallesLista" >
+    <div class="icon">
+      <i class="bi bi-feather"></i>
+    </div>
+    Detalles de la lista
+  </a>
+
+  <a href="#" id="login">
     <div class="icon">
       <i class="bi bi-door-open"></i>
     </div>
-    Login
+    Registro
   </a>
+
 </div>
+
 <div class="container" id="contenido">
   <h2>Lista de la compra (28)</h2>
   <ul>
@@ -109,5 +119,8 @@
 <script th:src="@{/js/scripts.js}" defer></script>
 <script th:src="@{/js/apiFetch.js}" defer></script>
 </body>
+<script>
+  //escuchador del boton de registro
 
+</script>
 </html>

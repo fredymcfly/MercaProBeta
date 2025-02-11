@@ -1,25 +1,39 @@
 <style>
-    .listaItem
-    {
-        border-bottom:1px solid silver;
-        padding-bottom:5px;
-        text-align:left;
+    /* Estilo para los elementos de la lista de compras */
+    .listaItem {
+        border-bottom: 1px solid silver; /* Agrega una línea plateada debajo de cada ítem de la lista */
+        padding-bottom: 5px; /* Espaciado en la parte inferior de cada ítem */
+        text-align: left; /* Alinea el texto a la izquierda */
     }
 </style>
-<div class="container" >
+
+<!-- Contenedor principal -->
+<div class="container">
     <div class="row">
-        <div class="col-6 offset-3"><h1 class="text-center mb-4">Listas de Compra</h1></div>
-        <div class="col-3"><a href="#" id="nuevaLista" class="btn btn-primary align-text-bottom">Nueva Lista</a></div>
+        <!-- Título de la sección centrado en la página -->
+        <div class="col-6 offset-3">
+            <h1 class="text-center mb-4">Listas de Compra</h1>
+        </div>
+        <!-- Botón para crear una nueva lista de compras -->
+        <div class="col-3">
+            <a href="#" id="nuevaLista" class="btn btn-primary align-text-bottom">Nueva Lista</a>
+        </div>
     </div>
+
     <div class="row">
         <div class="col">
+            <!-- Lista de compras dinámica generada con Thymeleaf -->
             <ul>
+                <!-- Recorre la lista de compras almacenada en "listasCompra" -->
                 <li th:each="ShoppingList : ${listasCompra}" class="listaItem row">
                     <div class="col-10">
+                        <!-- Muestra el nombre de la lista de compras -->
                         <h3 th:text="${ShoppingList.nombre}" class="listaTextItem"></h3>
+                        <!-- Muestra la fecha de la lista de compras -->
                         <span th:text="${ShoppingList.date}" class="listaSubTextITem"></span>
                     </div>
                     <div class="col-2">
+                        <!-- Enlace para ver los detalles de la lista seleccionada -->
                         <a th:href="@{/api/lists/detallesLista(id=${ShoppingList.id})}" class="verLista">Ver Lista</a>
                     </div>
                 </li>
